@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grazielly Ribeiro | Software Developer</title>
+    <link rel="icon" type="image/png" href="favicon.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,6 +17,7 @@
             --accent-red: #ff4d4d;
             --accent-yellow: #ffcc00;
             --border-radius: 24px;
+            --grid-color: rgba(255, 255, 255, 0.03);
         }
 
         * {
@@ -30,6 +32,11 @@
             background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
         /* --- Navigation --- */
@@ -40,18 +47,31 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 600px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
             padding: 15px 30px;
             border-radius: 100px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-kanji {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-main);
+            user-select: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
         }
 
         nav a {
-            color: var(--text-main);
+            color: var(--text-dim);
             text-decoration: none;
             font-size: 0.8rem;
             font-weight: 700;
@@ -62,11 +82,33 @@
 
         nav a:hover { color: var(--accent-blue); }
 
+        /* --- Floating Lateral Details --- */
+        .floating-sticker {
+            position: fixed;
+            padding: 10px 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            border-radius: 12px;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+            z-index: 1;
+            user-select: none;
+        }
+
+        .stick-blue   { background-color: var(--accent-blue); top: 20%; left: -20px; transform: rotate(-15deg); }
+        .stick-yellow { background-color: var(--accent-yellow); top: 50%; right: -15px; transform: rotate(10deg); }
+        .stick-green  { background-color: var(--accent-green); bottom: 15%; left: 10px; border-radius: 50px; font-size: 1rem; padding: 15px;}
+        .stick-red    { background-color: var(--accent-red); bottom: 30%; right: 25px; transform: rotate(-5deg); color: #fff; }
+
         /* --- Hero Section --- */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 120px 5% 50px;
+            position: relative;
+            z-index: 5;
         }
 
         .hero-grid {
@@ -81,7 +123,7 @@
             border-radius: var(--border-radius);
             padding: 40px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .card:hover { border-color: rgba(255, 255, 255, 0.15); }
@@ -97,12 +139,15 @@
         .profile-img {
             width: 100%;
             height: 100%;
+            min-height: 300px;
             object-fit: cover;
             border-radius: var(--border-radius);
-            filter: grayscale(20%);
+            filter: grayscale(100%);
+            transition: 0.5s;
         }
+        
+        .profile-img:hover { filter: grayscale(0%); }
 
-        /* --- Badges & Metadata --- */
         .meta-info {
             display: flex;
             gap: 20px;
@@ -140,7 +185,7 @@
         /* --- Projects Grid --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 20px;
         }
 
@@ -178,66 +223,67 @@
             padding: 80px 5%;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* --- Animations --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+            position: relative;
+            z-index: 5;
         }
 
         @media (max-width: 850px) {
-            .hero-grid, .projects-grid { grid-template-columns: 1fr; }
+            .hero-grid { grid-template-columns: 1fr; }
             nav { width: 95%; }
+            .floating-sticker { display: none; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">Sobre</a>
-        <a href="#skills">Linguagens</a>
-        <a href="#projects">Projetos</a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">Sobre</a>
+        </div>
+        <div class="logo-kanji">ツ</div>
+        <div class="nav-links">
+            <a href="#skills">Skills</a>
+            <a href="#projects">Work</a>
+        </div>
     </nav>
+
+    <div class="floating-sticker stick-blue">FULLSTACK ENG.</div>
+    <div class="floating-sticker stick-yellow">CLEAN CODE LAB</div>
+    <div class="floating-sticker stick-green">ツ</div>
+    <div class="floating-sticker stick-red">IFRN_PAUDOSFERROS</div>
 
     <main class="container" id="home">
         
         <div class="meta-info">
             <div class="meta-item"><b>Cargo</b>Software Developer</div>
-            <div class="meta-item"><b>Instituição</b>IFRN Pau dos Ferros</div>
-            <div class="meta-item"><b>Local</b>Rio Grande do Norte</div>
+            <div class="meta-item"><b>Formação</b>Téc. Informática</div>
+            <div class="meta-item"><b>Status</b>Disponível</div>
         </div>
 
         <div class="hero-grid">
-            <div class="card reveal">
-                <h1 class="grazy">GRAZIELLY<br>RIBEIRO</h1>
+            <div class="card">
+                <h1>GRAZIELLY<br>RIBEIRO</h1>
                 <p style="color: var(--text-dim); font-size: 1.2rem; max-width: 500px;">
                     Desenvolvedora em formação técnica, unindo lógica rigorosa à construção de interfaces modernas e funcionais.
                 </p>
             </div>
-            <div class="reveal">
+            <div>
                 <img src="eu.jpg" alt="Grazielly" class="profile-img">
             </div>
         </div>
 
-        <div class="card reveal" id="about" style="margin-bottom: 20px;">
+        <div class="card" id="about" style="margin-bottom: 20px;">
             <h2 style="text-transform: uppercase; margin-bottom: 15px; color: var(--accent-blue);">Apresentação Profissional</h2>
             <p>
-                Como estudante de Informática no Instituto Federal do Rio Grande do Norte (IFRN), desenvolvo projetos que transitam entre a automação de sistemas e o design de interfaces responsivas. Meu foco principal está na resolução de problemas complexos através de código limpo e escalável, aplicando conceitos de arquitetura de software e boas práticas de versionamento.
+                Como estudante de Informática no Instituto Federal do Rio Grande do Norte (IFRN), campus Pau dos Ferros, desenvolvo projetos que transitam entre a automação de sistemas e o design de interfaces responsivas. Meu foco principal está na resolução de problemas complexos através de código limpo e escalável, aplicando conceitos de arquitetura de software e boas práticas de versionamento.
             </p>
             <p style="margin-top: 15px;">
                 Busco oportunidades para aplicar meus conhecimentos em <b>Node.js</b>, <b>Python</b> e <b>Frontend Moderno</b>, contribuindo para o crescimento de ecossistemas tecnológicos inovadores.
             </p>
         </div>
 
-        <div class="card reveal" id="skills">
+        <div class="card" id="skills">
             <h2 style="text-transform: uppercase; margin-bottom: 25px;">Stack Tecnológica</h2>
             <div class="languages-section">
                 <div class="lang-tag js">JavaScript</div>
@@ -254,22 +300,31 @@
         <h2 style="margin: 60px 0 30px; text-transform: uppercase; letter-spacing: 3px;" id="projects">Projetos Selecionados</h2>
         
         <div class="projects-grid">
-            <div class="project-card reveal">
+            <div class="project-card">
+                <div>
+                    <span style="color: var(--accent-green); font-size: 0.7rem; font-weight: 700;">SOCIAL TREE / FRONTEND</span>
+                    <h3>Rocketseat Discover</h3>
+                    <p>Meu primeiro projeto realizado pelo curso Discover da Rocketseat, explorando conceitos fundamentais de HTML, CSS e JavaScript através de uma Social Tree personalizada.</p>
+                </div>
+                <a href="https://github.com/grazysss/projeto" target="_blank" class="btn-view">REPOSITÓRIO</a>
+            </div>
+
+            <div class="project-card">
                 <div>
                     <span style="color: var(--accent-yellow); font-size: 0.7rem; font-weight: 700;">WEB APPLICATION</span>
                     <h3>Chronimes</h3>
                     <p>Plataforma de streaming conceitual de animes. Estudo aprofundado de estruturação DOM e estilização avançada.</p>
                 </div>
-                <a href="https://github.com/grazysss/CHRONIMES" class="btn-view">REPOSITÓRIO</a>
+                <a href="https://github.com/grazysss/CHRONIMES" target="_blank" class="btn-view">REPOSITÓRIO</a>
             </div>
 
-            <div class="project-card reveal">
+            <div class="project-card">
                 <div>
                     <span style="color: var(--accent-blue); font-size: 0.7rem; font-weight: 700;">BACKEND / LOGIC</span>
                     <h3>JS Fundamentals</h3>
                     <p>Implementação de algoritmos e lógica de programação voltada para performance em ambientes Node.js.</p>
                 </div>
-                <a href="https://github.com/grazysss/introjs" class="btn-view">REPOSITÓRIO</a>
+                <a href="https://github.com/grazysss/introjs" target="_blank" class="btn-view">REPOSITÓRIO</a>
             </div>
         </div>
 
@@ -277,32 +332,28 @@
 
     <footer id="contact">
         <h2 style="font-size: 2rem; margin-bottom: 10px;">Contato Profissional</h2>
-        <p style="color: var(--text-dim); margin-bottom: 30px;">Disponível para novos projetos e colaborações.</p>
-        <p><b>E-mail:</b> grazysouza2580@gmail.com</p>
-        <div style="margin-top: 20px;">
-            <a href="https://www.linkedin.com/in/grazielly-s-49b2853b3" style="color: var(--accent-blue); margin: 0 10px;">LinkedIn</a>
-            <a href="https://github.com/grazysss" style="color: var(--accent-green); margin: 0 10px;">GitHub</a>
+        <p style="color: var(--text-dim); margin-bottom: 30px;">grazysouza2580@gmail.com</p>
+        <div>
+            <a href="https://www.linkedin.com/in/grazielly-s-49b2853b3" target="_blank" style="color: var(--accent-blue); margin: 0 10px; text-decoration: none; font-weight: 700;">LinkedIn</a>
+            <a href="https://github.com/grazysss" target="_blank" style="color: var(--accent-green); margin: 0 10px; text-decoration: none; font-weight: 700;">GitHub</a>
         </div>
+        <p style="margin-top: 40px; font-size: 0.7rem; color: var(--text-dim);">© 2026 Grazielly Ribeiro. ツ.dev</p>
     </footer>
 
     <script>
-        // Função para revelar elementos ao rolar a página
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
+        const stickers = document.querySelectorAll('.floating-sticker');
 
-        window.addEventListener("scroll", reveal);
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
 
-        // Disparar uma vez no carregamento
-        reveal();
+            stickers.forEach((sticker, index) => {
+                const speed = (index + 1) * 15; 
+                const xPos = (x - 0.5) * speed;
+                const yPos = (y - 0.5) * speed;
+                sticker.style.translate = `${xPos}px ${yPos}px`;
+            });
+        });
     </script>
 </body>
 </html>
